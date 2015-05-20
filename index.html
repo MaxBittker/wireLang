@@ -22,8 +22,8 @@ var canvasWidth  = 600;
 var canvasHeight = 300;
 var gridSize = canvasWidth/20;
 var position = {};
-position.x = 300;
-position.y = 150;
+position.x = canvasWidth/2;
+position.y = canvasHeight/2;
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -34,8 +34,8 @@ var els = document.querySelectorAll('input, select, textarea, button');
     this.addEventListener('keyup', function() {
     	var value = document.getElementById('drawstring').value;
     	ctx.clearRect ( 0 , 0 , canvasWidth, canvasHeight );
-		position.x = 300;
-		position.y = 150;
+		position.x = canvasWidth/2;
+		position.y = canvasHeight/2;
     	drawString(value,ctx);
     }, false);
 });
@@ -43,7 +43,7 @@ var els = document.querySelectorAll('input, select, textarea, button');
 function drawString(drawCode,context)
 {
 	context.beginPath();
-	context.moveTo(300, 150);
+	context.moveTo(canvasWidth/2, canvasHeight/2);
 
 	var loops = 0;
 	while(loops < 300){
@@ -83,8 +83,10 @@ function letterParser(letter,context)
 			break;
 	}
 	context.lineTo(position.x, position.y);
-	if( position.x > 600 ){ position.x = 0; context.moveTo(position.x, position.y); }
-	if( position.y > 300 ){ position.y = 0; context.moveTo(position.x, position.y); }
+	if( position.x > canvasWidth ){ position.x = 0; context.moveTo(position.x, position.y); }
+	if( position.y > canvasHeight ){ position.y = 0; context.moveTo(position.x, position.y); }
+	if( position.x < 0 ){ position.x = canvasWidth; context.moveTo(position.x, position.y); }
+	if( position.y < 0 ){ position.y = canvasHeight; context.moveTo(position.x, position.y); }
 
 
 }
