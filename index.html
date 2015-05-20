@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3;"></canvas>
+
+</body>
+</html>
+
+<script>
+
+var canvasWidth  = 600;
+var canvasHeight = 300;
+var gridSize = canvasWidth/10;
+var position = {};
+position.x = 300;
+position.y = 150;
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+drawString("NESWnesw",ctx);
+
+function drawString(drawCode,context)
+{
+	context.beginPath();
+	context.moveTo(300, 150);
+	for (var i = 0, len = drawCode.length; i < len; i++) {
+		letterParser(drawCode[i],context);
+	}
+	context.stroke();
+}
+
+function letterParser(letter,context)
+{
+	switch(letter){
+		case "N": position.y += gridSize; break;
+		case "S": position.y -= gridSize; break;
+		case "E": position.x += gridSize; break;
+		case "W": position.x -= gridSize; break;
+		case "n": position.y += gridSize/2; break;
+		case "s": position.y -= gridSize/2; break;
+		case "e": position.x += gridSize/2; break;
+		case "w": position.x -= gridSize/2; break;
+	}
+	context.lineTo(position.x, position.y);
+}
+
+
+
+
+
+</script>
