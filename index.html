@@ -11,6 +11,7 @@
 <tr><td>L</td><td>S</td><td>D</td></tr>
 </table>
 
+<input type='text' id='drawstring' placeholder='Input command' style='padding:5px; margin:5px 0px'/>
 
 </body>
 </html>
@@ -27,7 +28,17 @@ position.y = 150;
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
-drawString("RD*en",ctx);
+
+var els = document.querySelectorAll('input, select, textarea, button');
+[].forEach.call(els, function(el) {
+    this.addEventListener('keyup', function() {
+    	var value = document.getElementById('drawstring').value;
+    	ctx.clearRect ( 0 , 0 , canvasWidth, canvasHeight );
+		position.x = 300;
+		position.y = 150;
+    	drawString(value,ctx);
+    }, false);
+});
 
 function drawString(drawCode,context)
 {
