@@ -70,10 +70,10 @@ function letterParser(letter,context)
 		case "L": position.x -= gridSize; position.y -= gridSize; break;
 		case "R": position.x += gridSize; position.y += gridSize; break;
 		case "D": position.x += gridSize; position.y -= gridSize; break;
-		case "T": position.x -= gridSize/2; position.y += gridSize/2; break;
-		case "L": position.x -= gridSize/2; position.y -= gridSize/2; break;
-		case "R": position.x += gridSize/2; position.y += gridSize/2; break;
-		case "D": position.x += gridSize/2; position.y -= gridSize/2; break;
+		case "t": position.x -= gridSize/2; position.y += gridSize/2; break;
+		case "l": position.x -= gridSize/2; position.y -= gridSize/2; break;
+		case "r": position.x += gridSize/2; position.y += gridSize/2; break;
+		case "d": position.x += gridSize/2; position.y -= gridSize/2; break;
 		case "*":
 			context.arc(position.x,position.y,5,0,2*Math.PI);
 			context.stroke();
