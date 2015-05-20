@@ -3,6 +3,14 @@
 <body>
 
 <canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3;"></canvas>
+<br />
+<table border=1>
+
+<tr><td>T</td><td>N</td><td>R</td></tr>
+<tr><td>W</td><td>*</td><td>E</td></tr>
+<tr><td>L</td><td>S</td><td>D</td></tr>
+</table>
+
 
 </body>
 </html>
@@ -11,7 +19,7 @@
 
 var canvasWidth  = 600;
 var canvasHeight = 300;
-var gridSize = canvasWidth/10;
+var gridSize = canvasWidth/20;
 var position = {};
 position.x = 300;
 position.y = 150;
@@ -19,15 +27,21 @@ position.y = 150;
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
-drawString("NESWnesw",ctx);
+drawString("RD*en",ctx);
 
 function drawString(drawCode,context)
 {
 	context.beginPath();
 	context.moveTo(300, 150);
-	for (var i = 0, len = drawCode.length; i < len; i++) {
-		letterParser(drawCode[i],context);
+
+	var loops = 0;
+	while(loops < 300){
+		for (var i = 0, len = drawCode.length; i < len; i++) {
+			letterParser(drawCode[i],context);
+		}
+		loops++;
 	}
+	
 	context.stroke();
 }
 
@@ -42,12 +56,26 @@ function letterParser(letter,context)
 		case "s": position.y -= gridSize/2; break;
 		case "e": position.x += gridSize/2; break;
 		case "w": position.x -= gridSize/2; break;
+		case "T": position.x -= gridSize; position.y += gridSize; break;
+		case "L": position.x -= gridSize; position.y -= gridSize; break;
+		case "R": position.x += gridSize; position.y += gridSize; break;
+		case "D": position.x += gridSize; position.y -= gridSize; break;
+		case "T": position.x -= gridSize/2; position.y += gridSize/2; break;
+		case "L": position.x -= gridSize/2; position.y -= gridSize/2; break;
+		case "R": position.x += gridSize/2; position.y += gridSize/2; break;
+		case "D": position.x += gridSize/2; position.y -= gridSize/2; break;
+		case "*":
+			context.arc(position.x,position.y,5,0,2*Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;
 	}
 	context.lineTo(position.x, position.y);
+	if( position.x > 600 ){ position.x = 0; context.moveTo(position.x, position.y); }
+	if( position.y > 300 ){ position.y = 0; context.moveTo(position.x, position.y); }
+
+
 }
-
-
-
-
 
 </script>
