@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="wireLang.css">
 
 <body>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3; margin:40px auto; display:block"></canvas>
 <br />
 <input type='text' id='drawstring' placeholder='What is your name?' style='padding:5px; margin:5px 0px; display:block; margin:0px auto; width:290px; margin-bottom:40px'/>
@@ -33,7 +33,7 @@ forked from aliceffekt's wireLang. I apologize for lack of support for non-latin
 
 <script>
 
-var canvasWidth  = 600;
+var canvasWidth  = Math.min( screen.width,600);
 var canvasHeight = 300;
 var seperation = 60;
 var gridSize = canvasWidth/20;
@@ -84,7 +84,7 @@ function drawString(drawCode,context)
 
 function letterParser(letter,context)
 {   
-	console.log(letter,word);
+	// console.log(letter,word);
 
 	switch(letter.toUpperCase()){
 		case "Q": position.y += gridSize; break;
