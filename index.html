@@ -33,6 +33,7 @@ forked from aliceffekt's wireLang. I apologize for lack of support for non-latin
 
 <script>
 
+
 var canvasWidth  = Math.min( screen.width,600);
 var canvasHeight = 300;
 var seperation = 60;
@@ -44,6 +45,7 @@ position.y = canvasHeight/2;
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
+ctx.canvas.width  = canvasWidth-10;
 
 var word = 0;
 var words = 0;
