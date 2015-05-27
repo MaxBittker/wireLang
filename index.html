@@ -17,9 +17,10 @@ window.onload = function(){
   text_input.focus ();
   text_input.select ();
 }
-
-       
 </script>
+<script type="text/javascript">
+ window.scrollTo(0, 0);
+ </script>
 <!-- <table style='width:300px;margin:0px auto; text-align:center'>
 <tr><td>T</td><td>N</td><td>R</td></tr>
 <tr><td>W</td><td>*</td><td>E</td></tr>
@@ -68,6 +69,8 @@ var els = document.querySelectorAll('input, select, textarea, button');
 
 function drawString(drawCode,context)
 {
+	 window.scrollTo(0, 0);
+
 	context.beginPath();
 	drawCode = drawCode.trim();
 	word = 0;
