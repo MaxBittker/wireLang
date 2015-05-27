@@ -4,11 +4,11 @@
 <link rel="stylesheet" href="wireLang.css">
 
 <body>
-<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
 
 <canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3; margin:40px auto; display:block"></canvas>
 <br />
-<input type='text' id='drawstring' placeholder='What is your name?' style='padding:5px; margin:5px 0px; display:block; margin:0px auto; width:290px; margin-bottom:40px' onfocus="this.style.webkitTransform = 'translate3d(0px,-10000px,0)'; webkitRequestAnimationFrame(function() { this.style.webkitTransform = ''; }.bind(this))"/>
+<input type='text' id='drawstring' placeholder='What is your name?' style='padding:5px; margin:5px 0px; display:block; margin:0px auto; width:290px; margin-bottom:40px' />
 
 <script type="text/javascript">
 window.onload = function(){
@@ -35,8 +35,8 @@ forked from aliceffekt's wireLang. I apologize for lack of support for non-latin
 <script>
 
 
-var canvasWidth  = Math.min( screen.width,600);
-var canvasHeight = 300;
+var canvasWidth  = Math.min( screen.width -20,600);
+var canvasHeight = Math.min( screen.height/2,300);
 var seperation = 60;
 var gridSize = canvasWidth/20;
 var position = {};
@@ -46,7 +46,8 @@ position.y = canvasHeight/2;
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
-ctx.canvas.width  = canvasWidth-10;
+ctx.canvas.width  = canvasWidth;
+ctx.canvas.height = canvasHeight;
 
 var word = 0;
 var words = 0;
