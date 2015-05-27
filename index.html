@@ -8,7 +8,7 @@
 
 <canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3; margin:40px auto; display:block"></canvas>
 <br />
-<input type='text' id='drawstring' placeholder='What is your name?' style='padding:5px; margin:5px 0px; display:block; margin:0px auto; width:290px; margin-bottom:40px' />
+<input type='text' id='drawstring' placeholder='What is your name?' style='padding:5px; margin:5px 0px; display:block; margin:0px auto; width:290px; margin-bottom:40px' onfocus="rePos(this)" />
 
 <script type="text/javascript">
 window.onload = function(){
@@ -16,6 +16,13 @@ window.onload = function(){
   text_input.focus ();
   text_input.select ();
 }
+
+function rePos(sfield)
+{
+var yPos = window.pageYOffset || document.documentElement.scollTop;
+setTimeout(function() {window.scrollTo(0, yPos);},0);
+}
+
 </script>
 <!-- <table style='width:300px;margin:0px auto; text-align:center'>
 <tr><td>T</td><td>N</td><td>R</td></tr>
