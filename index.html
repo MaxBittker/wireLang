@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html>
+
+<link rel="stylesheet" href="wireLang.css">
+
 <body>
 
 <canvas id="myCanvas" width="600" height="300" style="border:1px solid #d3d3d3; margin:40px auto; display:block"></canvas>
 <br />
-<input type='text' id='drawstring' placeholder='Input command' style='padding:5px; margin:5px 0px; display:block; margin:0px auto; width:290px; margin-bottom:40px'/>
+<input type='text' id='drawstring' placeholder='Input Name' style='padding:5px; margin:5px 0px; display:block; margin:0px auto; width:290px; margin-bottom:40px'/>
 
-<table style='width:300px;margin:0px auto; text-align:center'>
+<script type="text/javascript">
+window.onload = function(){
+  var text_input = document.getElementById ('drawstring');
+  text_input.focus ();
+  text_input.select ();
+}
+</script>
+<!-- <table style='width:300px;margin:0px auto; text-align:center'>
 <tr><td>T</td><td>N</td><td>R</td></tr>
 <tr><td>W</td><td>*</td><td>E</td></tr>
 <tr><td>L</td><td>S</td><td>D</td></tr>
-</table>
+</table> -->
+
+<div id="footer">
+forked from aliceffekt's wireLang. I profusely apologize for lack of support for non-latin characters
+</div>
+
+
 
 </body>
 </html>
@@ -19,6 +35,7 @@
 
 var canvasWidth  = 600;
 var canvasHeight = 300;
+var seperation = 60;
 var gridSize = canvasWidth/20;
 var position = {};
 position.x = canvasWidth/2;
@@ -28,6 +45,10 @@ var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
 
+var word = 0;
+var words = 0;
+
+	
 var els = document.querySelectorAll('input, select, textarea, button');
 [].forEach.call(els, function(el) {
     this.addEventListener('keyup', function() {
@@ -42,50 +63,111 @@ var els = document.querySelectorAll('input, select, textarea, button');
 function drawString(drawCode,context)
 {
 	context.beginPath();
-	context.moveTo(canvasWidth/2, canvasHeight/2);
+	drawCode = drawCode.trim();
+	word = 0;
 
-	var loops = 0;
-	while(loops < 300){
+	words = drawCode.split(" ").length - 1;
+	var xStart =(canvasWidth/2) - (words*seperation/2);
+	
+	context.moveTo(xStart, canvasHeight/2);
+	position.x = xStart;
+	// var loops = 0;
+	// while(loops < 300){
 		for (var i = 0, len = drawCode.length; i < len; i++) {
 			letterParser(drawCode[i],context);
 		}
-		loops++;
-	}
+		// loops++;
+	// }
 	
 	context.stroke();
 }
 
 function letterParser(letter,context)
-{
-	switch(letter){
-		case "N": position.y += gridSize; break;
-		case "S": position.y -= gridSize; break;
+{   
+	console.log(letter,word);
+
+	switch(letter.toUpperCase()){
+		case "Q": position.y += gridSize; break;
+		case "W": position.y -= gridSize; break;
 		case "E": position.x += gridSize; break;
-		case "W": position.x -= gridSize; break;
-		case "n": position.y += gridSize/2; break;
-		case "s": position.y -= gridSize/2; break;
-		case "e": position.x += gridSize/2; break;
-		case "w": position.x -= gridSize/2; break;
-		case "T": position.x -= gridSize; position.y += gridSize; break;
-		case "L": position.x -= gridSize; position.y -= gridSize; break;
-		case "R": position.x += gridSize; position.y += gridSize; break;
-		case "D": position.x += gridSize; position.y -= gridSize; break;
-		case "t": position.x -= gridSize/2; position.y += gridSize/2; break;
-		case "l": position.x -= gridSize/2; position.y -= gridSize/2; break;
-		case "r": position.x += gridSize/2; position.y += gridSize/2; break;
-		case "d": position.x += gridSize/2; position.y -= gridSize/2; break;
-		case "*":
+		case "R": position.x -= gridSize; break;
+		case "T": position.y += gridSize/2; break;
+		case "Y": position.y -= gridSize/2; break;
+		case "U": position.x += gridSize/2; break;
+		case "I": position.x -= gridSize/2; break;
+		case "O": position.x -= gridSize; position.y += gridSize; break;
+		case "P": position.x -= gridSize; position.y -= gridSize; break;
+		case "A": position.x += gridSize; position.y += gridSize; break;
+		case "S": position.x += gridSize; position.y -= gridSize; break;
+		case "D": position.x -= gridSize/2; position.y += gridSize/2; break;
+		case "F": position.x -= gridSize/2; position.y -= gridSize/2; break;
+		case "G": position.x += gridSize/2; position.y += gridSize/2; break;
+		case "H": position.x += gridSize/2; position.y -= gridSize/2; break;
+
+		case "J": 
 			context.arc(position.x,position.y,5,0,2*Math.PI);
 			context.stroke();
 			context.beginPath();
 			context.moveTo(position.x, position.y);
 			break;
+		case "K": 
+			context.arc(position.x,position.y,10,0,2*Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;
+		case "L": context.arc(position.x,position.y,5,0,Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;		
+		case "Z": position.x -= gridSize; break;
+		case "X": position.y += gridSize/2; break;
+		case "C": context.arc(position.x,position.y,5,0,Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;
+		case "V": context.arc(position.x,position.y,5,Math.PI,2*Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;
+		case "B":  context.arc(position.x,position.y,10,Math.PI,2*Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;
+		case "N":  context.arc(position.x,position.y,5,0,.5*Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;
+		case "M":  context.arc(position.x,position.y,10,0,.5*Math.PI);
+			context.stroke();
+			context.beginPath();
+			context.moveTo(position.x, position.y);
+			break;
+		case " ": 
+			word++;
+			position.x =  (canvasWidth/2) - (words * seperation/2) + (word * seperation);
+			position.y =  canvasHeight/2;
+			break;
+		
+		
 	}
+	if (letter===" ")
+	{
+	 context.moveTo(position.x,position.y);	
+	}
+	else
+	{
 	context.lineTo(position.x, position.y);
-	if( position.x > canvasWidth ){ position.x = 0; context.moveTo(position.x, position.y); }
-	if( position.y > canvasHeight ){ position.y = 0; context.moveTo(position.x, position.y); }
-	if( position.x < 0 ){ position.x = canvasWidth; context.moveTo(position.x, position.y); }
-	if( position.y < 0 ){ position.y = canvasHeight; context.moveTo(position.x, position.y); }
+	}
+	// if( position.x > canvasWidth ){ position.x = 0; context.moveTo(position.x, position.y); }
+	// if( position.y > canvasHeight ){ position.y = 0; context.moveTo(position.x, position.y); }
+	// if( position.x < 0 ){ position.x = canvasWidth; context.moveTo(position.x, position.y); }
+	// if( position.y < 0 ){ position.y = canvasHeight; context.moveTo(position.x, position.y); }
 
 
 }
